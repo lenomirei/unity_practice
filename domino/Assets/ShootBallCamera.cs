@@ -51,6 +51,6 @@ public class ShootBallCamera : MonoBehaviour
         Vector3 cam_pos = main_camera_.transform.localPosition;
         cam_pos.z += 2;
         GameObject sphere = GameObject.Instantiate(sphere_, cam_pos, main_camera_.transform.rotation);
-        sphere.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 200.0f));
+        sphere.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 200.0f), ForceMode.Acceleration);
     }
 }
