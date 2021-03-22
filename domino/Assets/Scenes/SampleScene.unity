@@ -526,7 +526,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphere_: {fileID: 6992801009396767411, guid: 9fbd642b59423834c92b20d8b39f7409, type: 3}
-  shoot_force_: 200
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
