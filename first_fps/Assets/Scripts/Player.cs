@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     Transform camera_transform_;
     Vector3 cam_rot_;
     public float cam_rot_speed_ = 3.0f;
+    float camera_height_ = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,8 @@ public class Player : MonoBehaviour
         cam_rot_.y += mx;
         camera_transform_.eulerAngles = cam_rot_;
 
+        transform_.eulerAngles = camera_transform_.eulerAngles;
+
         float xm = 0f, ym = 0f, zm = 0f;
         if (Input.GetKey(KeyCode.W)) {
             zm += move_speed_ * Time.deltaTime;
@@ -54,6 +57,8 @@ public class Player : MonoBehaviour
             xm += move_speed_ * Time.deltaTime;
         }
         ch_controller_.Move(transform_.TransformDirection(new Vector3(xm, ym, zm)));
+
+        camera_transform_.position = transform_.TransformPoint(new Vector3(0, camera_height_, 0));
     }
 
     private void OnDrawGizmos()
