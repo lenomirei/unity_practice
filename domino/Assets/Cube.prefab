@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2166966777801029076}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: domino
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

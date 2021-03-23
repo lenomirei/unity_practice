@@ -8,6 +8,7 @@ public class ShootBallCamera : MonoBehaviour
     float camera_speed_;
     Vector3 camera_rot_;
     public GameObject sphere_;
+    public float shoot_speed_ = 200.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +50,8 @@ public class ShootBallCamera : MonoBehaviour
 
     void ShootSphere() {
         Vector3 cam_pos = main_camera_.transform.localPosition;
-        cam_pos.z += 2;
+        Vector3 camera_forward = main_camera_.transform.forward;
         GameObject sphere = GameObject.Instantiate(sphere_, cam_pos, main_camera_.transform.rotation);
-        sphere.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 200.0f), ForceMode.Acceleration);
+        sphere.GetComponent<Rigidbody>().AddForce(camera_forward * shoot_speed_, ForceMode.Acceleration);
     }
 }
