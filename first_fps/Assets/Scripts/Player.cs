@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
     public Transform transform_;
     CharacterController ch_controller_;
-    float move_speed_ = 5.0f;
+    float move_speed_ = 10.0f;
     public int life = 5;
     Transform camera_transform_;
     Vector3 cam_rot_;
     public float cam_rot_speed_ = 3.0f;
-    float camera_height_ = 2.0f;
+    float camera_height_ = 1.4f;
 
     // Start is called before the first frame update
     void Start()
