@@ -41,7 +41,12 @@ public class Player : MonoBehaviour
         cam_rot_.y += mx;
         camera_transform_.eulerAngles = cam_rot_;
 
-        transform_.eulerAngles = camera_transform_.eulerAngles;
+        Vector3 camrot = camera_transform_.eulerAngles;
+        camrot.x = 0;
+        camrot.z = 0;
+
+
+        transform_.eulerAngles = camrot;
 
         float xm = 0f, ym = 0f, zm = 0f;
         if (Input.GetKey(KeyCode.W)) {
