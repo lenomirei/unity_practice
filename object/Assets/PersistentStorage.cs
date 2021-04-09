@@ -16,13 +16,13 @@ public class PersistentStorage : MonoBehaviour
         
     }
 
-    void Save()
-    { 
-
+    public void Save(PersistableObject po)
+    {
+        po.Save();
     }
 
-    void Load()
-    { 
-
+    public void Load(PersistableObject po)
+    {
+        po.Load();
     }
 }

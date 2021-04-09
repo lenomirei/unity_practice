@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PersistableObject : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,12 +17,12 @@ public class PersistableObject : MonoBehaviour
         
     }
 
-    void Save()
+    public virtual void Save()
     { 
 
     }
 
-    void Load()
+    public virtual void Load()
     { 
 
     }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour
+public class Game : PersistableObject
 {
-    public Transform perfab_;
-    protected List<Transform> objects_;
+    public PersistableObject perfab_;
+    public PersistentStorage storage_;
+    protected List<PersistableObject> objects_;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,7 @@ public class Game : MonoBehaviour
 
     private void Awake()
     {
-        objects_ = new List<Transform>();
+        objects_ = new List<PersistableObject>();
     }
 
     // Update is called once per frame
@@ -29,14 +30,25 @@ public class Game : MonoBehaviour
         {
             BeginNewGame();
         }
+
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            storage_.Save(this);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.L))
+        { 
+
+        }
     }
 
     void CreateObject()
     {
-        Transform cube = Instantiate(perfab_);
-        cube.localPosition = Random.insideUnitSphere * 5;
-        cube.localRotation = Random.rotation;
-        cube.localScale = Vector3.one * Random.Range(0.1f, 1f);
+        PersistableObject cube = Instantiate(perfab_);
+        Transform cube_transform = cube.transform;
+        cube_transform.localPosition = Random.insideUnitSphere * 5;
+        cube_transform.localRotation = Random.rotation;
+        cube_transform.localScale = Vector3.one * Random.Range(0.1f, 1f);
 
         objects_.Add(cube);
     }
@@ -51,12 +63,12 @@ public class Game : MonoBehaviour
         objects_.Clear();
     }
 
-    void Save()
+    public override void Save()
     { 
 
     }
 
-    void Load()
+    public override new void Load()
     { 
 
     }
