@@ -5,6 +5,8 @@ using UnityEngine;
 public class PersistentStorage : MonoBehaviour
 {
     // Start is called before the first frame update
+    protected DataWriter writer;
+    protected DataReader reader;
     void Start()
     {
         
@@ -18,11 +20,11 @@ public class PersistentStorage : MonoBehaviour
 
     public void Save(PersistableObject po)
     {
-        po.Save();
+        po.Save(writer);
     }
 
     public void Load(PersistableObject po)
     {
-        po.Load();
+        po.Load(reader);
     }
 }

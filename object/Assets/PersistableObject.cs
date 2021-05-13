@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -17,13 +18,17 @@ public class PersistableObject : MonoBehaviour
         
     }
 
-    public virtual void Save()
-    { 
-
+    public virtual void Save(DataWriter dw)
+    {
+        dw.Write(this.transform.localPosition);
+        dw.Write(this.transform.localRotation);
+        dw.Write(this.transform.localScale);
     }
 
-    public virtual void Load()
-    { 
-
+    public virtual void Load(DataReader dw)
+    {
+        this.transform.localPosition = dw.ReadVector3();
+        this.transform.localRotation = dw.ReadQuaternion();
+        this.transform.localScale = dw.ReadVector3();
     }
 }

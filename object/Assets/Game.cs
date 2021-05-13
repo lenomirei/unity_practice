@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : PersistableObject
+public class Game : MonoBehaviour
 {
     public PersistableObject perfab_;
     public PersistentStorage storage_;
@@ -33,12 +33,12 @@ public class Game : PersistableObject
 
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            storage_.Save(this);
+            Save();
         }
 
         else if (Input.GetKeyDown(KeyCode.L))
-        { 
-
+        {
+            Load();
         }
     }
 
@@ -63,12 +63,14 @@ public class Game : PersistableObject
         objects_.Clear();
     }
 
-    public override void Save()
-    { 
+    public void Save()
+    {
+        for (int i = 0; i < objects_.Count; ++i) { 
 
+        }
     }
 
-    public override new void Load()
+    public void Load()
     { 
 
     }
