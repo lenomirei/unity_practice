@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class PersistentStorage : MonoBehaviour
 {
+    string savePath;
     // Start is called before the first frame update
-    protected DataWriter writer;
-    protected DataReader reader;
     void Start()
     {
-        
+        savePath = "./savedata";
     }
 
     // Update is called once per frame
@@ -20,11 +20,13 @@ public class PersistentStorage : MonoBehaviour
 
     public void Save(PersistableObject po)
     {
-        po.Save(writer);
+        var writer = new BinaryWriter(File.Open(savePath, FileMode.Create));
+        po.Save(new DataWriter(writer));
     }
 
     public void Load(PersistableObject po)
     {
-        po.Load(reader);
+        var reader = new BinaryReader(File.Open(savePath, FileMode.Open));
+        po.Load(new DataReader(reader));
     }
 }

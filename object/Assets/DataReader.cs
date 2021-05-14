@@ -8,9 +8,8 @@ public class DataReader
     protected string savePath;
     protected BinaryReader reader;
 
-    public DataReader() {
-        savePath = "./savedata";
-        reader = new BinaryReader(File.Open(savePath, FileMode.Open));
+    public DataReader(BinaryReader reader) {
+        this.reader = reader;
     }
 
     public Quaternion ReadQuaternion() {
@@ -27,6 +26,16 @@ public class DataReader
         result.x = reader.ReadSingle();
         result.y = reader.ReadSingle();
         result.z = reader.ReadSingle();
+        return result;
+    }
+
+    public float ReadFloat() {
+        float result = reader.ReadSingle();
+        return result;
+    }
+
+    public int ReadInt() {
+        int result = reader.ReadInt32();
         return result;
     }
 }

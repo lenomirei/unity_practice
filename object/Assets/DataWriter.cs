@@ -8,9 +8,8 @@ public class DataWriter
 {
     protected string savePath;
     protected BinaryWriter writer;
-    public DataWriter() {
-        savePath = "./savedata";
-        writer = new BinaryWriter(File.Open(savePath, FileMode.Create));
+    public DataWriter(BinaryWriter writer) {
+        this.writer = writer;
     }
 
     public void Write(Quaternion value) {
@@ -24,5 +23,13 @@ public class DataWriter
         writer.Write(value.x);
         writer.Write(value.y);
         writer.Write(value.z);
+    }
+
+    public void Write(float value) {
+        writer.Write(value);
+    }
+
+    public void Write(int value) {
+        writer.Write(value);
     }
 }
