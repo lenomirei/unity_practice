@@ -69,7 +69,9 @@ public class Game : PersistableObject
         writer.Write(count);
         for (int i = 0; i < count; ++i) {
             int shapeID = shapes[i].ShapeID;
+            int materialID = shapes[i].MaterialID;
             writer.Write(shapeID);
+            writer.Write(materialID);
             shapes[i].Save(writer);
         }
     }
@@ -79,7 +81,8 @@ public class Game : PersistableObject
         int count = reader.ReadInt();
         for (int i = 0; i < count; ++i) {
             int shapeID = reader.ReadInt();
-            Shape shape = Instantiate(shapeFactory.Get(shapeID));
+            int materialID = reader.ReadInt();
+            Shape shape = Instantiate(shapeFactory.Get(shapeID, materialID));
             shape.Load(reader);
             shapes.Add(shape);
         }
