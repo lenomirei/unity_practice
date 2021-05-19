@@ -371,8 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abe2632b1bdd5c489df33987f149a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perfab_: {fileID: 320942433010601105, guid: 503ab90a095e20244a4299fcfc1f2e2c, type: 3}
-  storage_: {fileID: 1065951872}
+  shapeFactory: {fileID: 11400000, guid: 1fbfdd4631946ed46b8ae12f86fa21f0, type: 2}
+  storage: {fileID: 1065951872}
 --- !u!4 &1630223870
 Transform:
   m_ObjectHideFlags: 0

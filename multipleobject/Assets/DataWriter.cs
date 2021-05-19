@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DataWriter
 {
-    protected string savePath;
+    protected string savePath_;
     protected BinaryWriter writer;
     public DataWriter(BinaryWriter writer) {
         this.writer = writer;

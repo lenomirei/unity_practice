@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
 public class ShapeFactory : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField]
+    Shape[] perfabs;
+
+    public Shape Get(int shapeID) {
+        Shape instance = Instantiate(perfabs[shapeID]);
+        instance.ShapeID = shapeID;
+        return instance;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Shape GetRandom() {
+        int shapeID = Random.Range(0, perfabs.Length);
+        Shape instance = Instantiate(perfabs[shapeID]);
+        instance.ShapeID = shapeID;
+        return instance;
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Game : PersistableObject
 {
-    public PersistableObject perfab_;
-    public PersistentStorage storage_;
-    protected List<PersistableObject> objects_;
+    public ShapeFactory shapeFactory;
+    public PersistentStorage storage;
+    protected List<Shape> shapes;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,7 @@ public class Game : PersistableObject
 
     private void Awake()
     {
-        objects_ = new List<PersistableObject>();
+        shapes = new List<Shape>();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class Game : PersistableObject
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            CreateObject();
+            CreateShape();
         }
 
         else if (Input.GetKeyDown(KeyCode.N))
@@ -33,42 +33,44 @@ public class Game : PersistableObject
 
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            storage_.Save(this);
+            storage.Save(this);
         }
 
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            storage_.Load(this);
+            storage.Load(this);
         }
     }
 
-    void CreateObject()
+    void CreateShape()
     {
-        PersistableObject cube = Instantiate(perfab_);
-        Transform cube_transform = cube.transform;
+        Shape shape = shapeFactory.GetRandom();
+        Transform cube_transform = shape.transform;
         cube_transform.localPosition = Random.insideUnitSphere * 5;
         cube_transform.localRotation = Random.rotation;
         cube_transform.localScale = Vector3.one * Random.Range(0.1f, 1f);
 
-        objects_.Add(cube);
+        shapes.Add(shape);
     }
 
     void BeginNewGame()
     {
-        for (int i = 0; i < objects_.Count; ++i)
+        for (int i = 0; i < shapes.Count; ++i)
         {
-            Destroy(objects_[i].gameObject);
+            Destroy(shapes[i].gameObject);
         }
 
-        objects_.Clear();
+        shapes.Clear();
     }
 
     public override void Save(DataWriter writer)
     {
-        int count = objects_.Count;
+        int count = shapes.Count;
         writer.Write(count);
         for (int i = 0; i < count; ++i) {
-            objects_[i].Save(writer);
+            int shapeID = shapes[i].ShapeID;
+            writer.Write(shapeID);
+            shapes[i].Save(writer);
         }
     }
 
@@ -76,9 +78,10 @@ public class Game : PersistableObject
     {
         int count = reader.ReadInt();
         for (int i = 0; i < count; ++i) {
-            PersistableObject cube = Instantiate(perfab_);
-            cube.Load(reader);
-            objects_.Add(cube);
+            int shapeID = reader.ReadInt();
+            Shape shape = Instantiate(shapeFactory.Get(shapeID));
+            shape.Load(reader);
+            shapes.Add(shape);
         }
     }
 }

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Shape : PersistableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public int ShapeID
     {
-        
-    }
+        get {
+            return shapeID;
+        }
+        set {
+            if (shapeID == 0) {
+                shapeID = value;
+            }
+            else {
+                Debug.LogError("Can not change shape");
+            }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
+    int shapeID;
 }
