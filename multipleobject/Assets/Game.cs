@@ -7,6 +7,9 @@ public class Game : PersistableObject
     public ShapeFactory shapeFactory;
     public PersistentStorage storage;
     protected List<Shape> shapes;
+    float creationProgress;
+    float destroyProgress;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,16 @@ public class Game : PersistableObject
     // Update is called once per frame
     void Update()
     {
+        creationProgress += Time.deltaTime * CreationSpeed;
+        while (creationProgress >= 1f) {
+            creationProgress -= 1f;
+            CreateShape();
+        }
+        destroyProgress += Time.deltaTime * DestroySpeed;
+        while (destroyProgress >= 1f) {
+            destroyProgress -= 1f;
+            DestroyShape();
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             CreateShape();
@@ -100,5 +113,13 @@ public class Game : PersistableObject
             shape.Load(reader);
             shapes.Add(shape);
         }
+    }
+
+    public float CreationSpeed {
+        get;set;
+    }
+
+    public float DestroySpeed {
+        get; set;
     }
 }

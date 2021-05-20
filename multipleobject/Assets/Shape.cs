@@ -5,11 +5,11 @@ using UnityEngine;
 public class Shape : PersistableObject
 {
     Color color;
-    MeshRenderer renderer;
+    MeshRenderer meshRenderer;
 
     private void Awake()
     {
-        renderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     public int ShapeID {
@@ -40,7 +40,7 @@ public class Shape : PersistableObject
     int materialID;
 
     public void SetMaterial(Material material, int id) {
-        renderer.material = material;
+        meshRenderer.material = material;
         materialID = id;
     }
 
@@ -50,7 +50,7 @@ public class Shape : PersistableObject
         // GetComponent<MeshRenderer>().material.color = color;
         var propertyBlock = new MaterialPropertyBlock();
         propertyBlock.SetColor("_Color", color);
-        renderer.SetPropertyBlock(propertyBlock);
+        meshRenderer.SetPropertyBlock(propertyBlock);
     }
 
     public override void Load(DataReader dr)
