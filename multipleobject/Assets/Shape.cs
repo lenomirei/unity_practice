@@ -5,6 +5,13 @@ using UnityEngine;
 public class Shape : PersistableObject
 {
     Color color;
+    MeshRenderer renderer;
+
+    private void Awake()
+    {
+        renderer = GetComponent<MeshRenderer>();
+    }
+
     public int ShapeID {
         get {
             return shapeID;
@@ -33,7 +40,7 @@ public class Shape : PersistableObject
     int materialID;
 
     public void SetMaterial(Material material, int id) {
-        GetComponent<MeshRenderer>().material = material;
+        renderer.material = material;
         materialID = id;
     }
 
@@ -41,6 +48,9 @@ public class Shape : PersistableObject
         this.color = color;
         // 设置材质的颜色会创建一个新的材质
         // GetComponent<MeshRenderer>().material.color = color;
+        var propertyBlock = new MaterialPropertyBlock();
+        propertyBlock.SetColor("_Color", color);
+        renderer.SetPropertyBlock(propertyBlock);
     }
 
     public override void Load(DataReader dr)
