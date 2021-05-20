@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shape : PersistableObject
 {
+    Color color;
     public int ShapeID {
         get {
             return shapeID;
@@ -34,5 +35,22 @@ public class Shape : PersistableObject
     public void SetMaterial(Material material, int id) {
         GetComponent<MeshRenderer>().material = material;
         materialID = id;
+    }
+
+    public void SetColor(Color color) {
+        this.color = color;
+        GetComponent<MeshRenderer>().material.color = color;
+    }
+
+    public override void Load(DataReader dr)
+    {
+        base.Load(dr);
+        SetColor(dr.ReadColor());
+    }
+
+    public override void Save(DataWriter dw)
+    {
+        base.Save(dw);
+        dw.WriteColor(this.color);
     }
 }

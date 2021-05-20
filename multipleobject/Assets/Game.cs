@@ -45,10 +45,11 @@ public class Game : PersistableObject
     void CreateShape()
     {
         Shape shape = shapeFactory.GetRandom();
-        Transform cube_transform = shape.transform;
-        cube_transform.localPosition = Random.insideUnitSphere * 5;
-        cube_transform.localRotation = Random.rotation;
-        cube_transform.localScale = Vector3.one * Random.Range(0.1f, 1f);
+        Transform shape_transform = shape.transform;
+        shape_transform.localPosition = Random.insideUnitSphere * 5;
+        shape_transform.localRotation = Random.rotation;
+        shape_transform.localScale = Vector3.one * Random.Range(0.1f, 1f);
+        shape.SetColor(Random.ColorHSV());
 
         shapes.Add(shape);
     }

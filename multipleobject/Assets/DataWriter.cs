@@ -32,4 +32,11 @@ public class DataWriter
     public void Write(int value) {
         writer.Write(value);
     }
+
+    public void WriteColor(Color color) {
+        writer.Write(color.r);
+        writer.Write(color.g);
+        writer.Write(color.b);
+        writer.Write(color.a);
+    }
 }

@@ -25,10 +25,10 @@ public class PersistableObject : MonoBehaviour
         dw.Write(this.transform.localScale);
     }
 
-    public virtual void Load(DataReader dw)
+    public virtual void Load(DataReader dr)
     {
-        this.transform.localPosition = dw.ReadVector3();
-        this.transform.localRotation = dw.ReadQuaternion();
-        this.transform.localScale = dw.ReadVector3();
+        this.transform.localPosition = dr.ReadVector3();
+        this.transform.localRotation = dr.ReadQuaternion();
+        this.transform.localScale = dr.ReadVector3();
     }
 }

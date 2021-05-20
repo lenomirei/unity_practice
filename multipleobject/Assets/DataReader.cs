@@ -38,4 +38,14 @@ public class DataReader
         int result = reader.ReadInt32();
         return result;
     }
+
+    public Color ReadColor() {
+        Color color;
+        color.r = reader.ReadSingle();
+        color.g = reader.ReadSingle();
+        color.b = reader.ReadSingle();
+        color.a = reader.ReadSingle();
+
+        return color;
+    }
 }
