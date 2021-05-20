@@ -26,6 +26,10 @@ public class Game : PersistableObject
             CreateShape();
         }
 
+        else if (Input.GetKeyDown(KeyCode.X)) {
+            DestroyShape();
+        }
+
         else if (Input.GetKeyDown(KeyCode.N))
         {
             BeginNewGame();
@@ -52,6 +56,15 @@ public class Game : PersistableObject
         shape.SetColor(Random.ColorHSV());
 
         shapes.Add(shape);
+    }
+
+    void DestroyShape() {
+        if (shapes.Count > 0) {
+            int index = Random.Range(0, shapes.Count);
+            Destroy(shapes[index].gameObject);
+            shapes[index] = shapes[shapes.Count - 1];
+            shapes.RemoveAt(shapes.Count - 1);
+        }
     }
 
     void BeginNewGame()

@@ -39,7 +39,8 @@ public class Shape : PersistableObject
 
     public void SetColor(Color color) {
         this.color = color;
-        GetComponent<MeshRenderer>().material.color = color;
+        // 设置材质的颜色会创建一个新的材质
+        // GetComponent<MeshRenderer>().material.color = color;
     }
 
     public override void Load(DataReader dr)
