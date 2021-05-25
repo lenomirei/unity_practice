@@ -9,7 +9,7 @@ public class Game : PersistableObject
     protected List<Shape> shapes;
     float creationProgress;
     float destroyProgress;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +74,7 @@ public class Game : PersistableObject
     void DestroyShape() {
         if (shapes.Count > 0) {
             int index = Random.Range(0, shapes.Count);
-            Destroy(shapes[index].gameObject);
+            shapeFactory.Reclaim(shapes[index]);
             shapes[index] = shapes[shapes.Count - 1];
             shapes.RemoveAt(shapes.Count - 1);
         }
@@ -84,7 +84,7 @@ public class Game : PersistableObject
     {
         for (int i = 0; i < shapes.Count; ++i)
         {
-            Destroy(shapes[i].gameObject);
+            shapeFactory.Reclaim(shapes[i]);
         }
 
         shapes.Clear();
